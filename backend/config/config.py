@@ -13,9 +13,9 @@ MONGODB_GROUPS_COLLECTION_NAME = os.environ.get(
                                             )
 
 # config flask app
-FLASK_DEBUG = True
+FLASK_DEBUG = False
+FLASK_HOST="127.0.0.1" if FLASK_DEBUG else "0.0.0.0"
 
 # constants
-
 VALID_STATUSES = ['new', 'review', 'accepted', 'deleted']
 STATISTIC_NUMBER_OF_DAYS = 30
