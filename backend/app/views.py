@@ -197,7 +197,7 @@ def update_image_status(image_id):
             "code": 400,
             "name": "Invalid status",
             "description": "Valid statuses are -
-                    ['approved', 'rejected', 'pending']"
+                    ['new', 'review', 'accepted', 'deleted']"
         }
 
     Response (Image Not Found):
