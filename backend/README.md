@@ -1,3 +1,17 @@
+# run test
+     1. You need to  populate database with imagecreator.py from create_test_db first
+     2. in backend/.env file chenge 
+               MONGODB_DB_NAME=image_service to 
+               MONGODB_TEST_DB_NAME=image_service_test
+               (This need to be rewrited using create app factory pattern)
+     3. run 
+               python -m unittest tests/testfile.py
+
+
+
+
+
+
 # Task
 
 Спроектировать backend с использованием python 3 и mongo db для сервиса обработки изображений. Изображения будет собирать другой сервис, этот же сервис будет формировать данные и записывать их в mongo db. Фронтенд будет иметь две страницы: статистика количества изображений по каждому статусу за последние 30 дней и страница со списком групп и изображений с возможностью изменить их статус.
