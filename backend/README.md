@@ -1,6 +1,6 @@
-# Flask App README
+# Image service Flask App README
 
-This README provides an overview of a Flask application and its primary routes and functionalities. The application is designed to manage and retrieve data related to groups and images.
+This README provides an overview of a Flask application and its primary routes and functionalities. The application is designed to manage and retrieve data related to groups and images. Images are stored in AWS S3. Image information sored in MondgoDB living in Atlas cloud.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -15,7 +15,7 @@ This README provides an overview of a Flask application and its primary routes a
 
 ## Introduction
 
-This Flask application serves as a RESTful API for managing groups and images. It provides endpoints for retrieving groups with associated images, updating the status of an image, and retrieving statistics for images created in the last 30 days.
+This Flask application serves as a RESTful API for managing groups and images. It provides endpoints for retrieving groups with associated images, updating the status of an image, and retrieving statistics for images statuses created in the last 30 days.
 
 The application utilizes a MongoDB database to store and retrieve data, including groups and images. It also includes error handling for common HTTP exceptions.
 
@@ -26,11 +26,8 @@ The application utilizes a MongoDB database to store and retrieve data, includin
 Before running the application, ensure you have Python and MongoDB installed on your system. You can set up a virtual environment and install the required packages using the following commands:
 
 ```bash
-# Create a virtual environment (optional but recommended)
+# Create a virtual environment
 python -m venv venv
-
-# Activate the virtual environment (Windows)
-venv\Scripts\activate
 
 # Activate the virtual environment (macOS/Linux)
 source venv/bin/activate
@@ -42,7 +39,7 @@ pip install -r requirements.txt
 To run the application, execute the following command:
 
 ```bash
-python run.py
+gunicorn --config gunicorn_config.py app:app
 ```
 
 The application should now be running and accessible at `http://localhost:5000`.
@@ -132,6 +129,7 @@ This endpoint allows you to update the status of an image identified by its uniq
 ```
 
 - `status`: The new status to assign to the image. It must be one of the valid statuses.
+-  Valid statuses are 'new', 'review', 'accepted' and 'deleted']
 
 #### Example Usage
 
@@ -163,7 +161,7 @@ PUT /images/5f76b5c5a548ebe57f213b3a
 {
     "code": 400,
     "name": "Invalid status",
-    "description": "Valid statuses are - ['approved', 'rejected', 'pending']"
+    "description": "Valid statuses are -  ['new', 'review', 'accepted', 'deleted']"
 }
 ```
 
@@ -227,21 +225,19 @@ It transforms HTTP exceptions into JSON responses containing error information, 
 Feel free to explore and use this Flask application for managing groups, images, and viewing statistics. If you have any questions or encounter issues, please refer to the documentation or contact the application developer for assistance.
 
 
-# run test
+## run test
      1. You need to  populate database with imagecreator.py from create_test_db first
      2. in backend/.env file chenge 
                MONGODB_DB_NAME=image_service to 
                MONGODB_TEST_DB_NAME=image_service_test
-               (This need to be rewrited using create app factory pattern)
+               (TODO: rewrite using create app factory pattern)
      3. run 
                python -m unittest tests/testfile.py
 
 
 
 
-
-
-# Task
+## Task description
 
 Спроектировать backend с использованием python 3 и mongo db для сервиса обработки изображений. Изображения будет собирать другой сервис, этот же сервис будет формировать данные и записывать их в mongo db. Фронтенд будет иметь две страницы: статистика количества изображений по каждому статусу за последние 30 дней и страница со списком групп и изображений с возможностью изменить их статус.
 
