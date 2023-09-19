@@ -18,12 +18,17 @@ This README provides an overview of a Flask application and its primary routes a
 This Flask application serves as a RESTful API for managing groups and images. It provides endpoints for retrieving groups with associated images, updating the status of an image, and retrieving statistics for images statuses created in the last 30 days.
 
 The application utilizes a MongoDB database to store and retrieve data, including groups and images. It also includes error handling for common HTTP exceptions.
+IT supposed that you have MongoFB up and running somewhere.
+It also uses AWS S3 for demonstaration purposes. So you also need and basket there.
+Check config files on what you need about to know to connect to them.
 
 ---
 
 ## Installation
 
-Before running the application, ensure you have Python and MongoDB installed on your system. You can set up a virtual environment and install the required packages using the following commands:
+Before running the application, ensure you have Python and MongoDB installed on your system. 
+
+You can set up a virtual environment and install the required packages using the following commands:
 
 ```bash
 # Create a virtual environment
