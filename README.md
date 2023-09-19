@@ -231,11 +231,13 @@ It transforms HTTP exceptions into JSON responses containing error information, 
 Feel free to explore and use this Flask application for managing groups, images, and viewing statistics. If you have any questions or encounter issues, please refer to the documentation or contact the application developer for assistance.
 
 
-## Run test
+## Running the Test
 
-Go to the create_test_db.
-create virtual enviroment and activate it. This should be different environment as it use AWS.
+Follow these steps to run the test:
 
+1. Navigate to the `create_test_db` directory.
+
+2. Create a virtual environment and activate it. Ensure that this environment is different from your standard environment as it is configured for use with AWS. Use the following commands:
 
     ```bash
     # Create a virtual environment
@@ -244,28 +246,29 @@ create virtual enviroment and activate it. This should be different environment 
     # Activate the virtual environment (macOS/Linux)
     source venv/bin/activate
 
-    # Install required packages
+    # Install the required packages
     pip install -r requirements.txt
     ```
 
-Edit createtestdb/.envdemo file with your own information and save it as .env file.
+3. Edit the `createtestdb/.envdemo` file with your specific information and save it as `.env`.
 
-
-Run create database script:
+4. Execute the database creation script:
 
     ```bash
-        python imagecreator.py
-        ```
+    python imagecreator.py
     ```
-        
-        
-Change venv to backend derictory.
-Change a MONGODB_DB_NAME to image_service_test
-and run a unittests.
+
+5. Change your virtual environment to the backend directory.
+
+6. Modify the `MONGODB_DB_NAME` variable to `image_service_test`.
+
+7. Run the unit tests using the following command:
 
     ```bash
     python -m unittest tests/testfile.py
     ```
+
+By following these steps, you should be able to run the test successfully. Ensure that you have the necessary dependencies and configurations in place before executing these commands.
 
 
 ## Task description
