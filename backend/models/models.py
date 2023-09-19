@@ -1,16 +1,20 @@
 """
 MongoDB Database Setup and Index Creation
 
-This script is responsible for setting up the MongoDB database connection and creating indexes
-to optimize database queries for your application. It uses the PyMongo library to interact with MongoDB.
+This script is responsible for setting up the MongoDB database
+connection and creating indexes
+to optimize database queries for your application. It uses the PyMongo library
+to interact with MongoDB.
 
 Usage:
-- Configure the MongoDB connection details and database/collection names in 'config.config'.
+- Configure the MongoDB connection details and database/collection names in
+'config.config'.
 
 
 Dependencies:
 - Ensure that you have installed the PyMongo library.
-- The configuration settings for MongoDB, including the URI, database name, and collection names,
+- The configuration settings for MongoDB, including the URI, database name,
+and collection names,
   should be defined in 'config.config'.
 """
 

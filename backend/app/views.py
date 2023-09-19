@@ -120,7 +120,7 @@ def get_groups_with_images():
     ]
 
     if status_filter and escape(status_filter) in VALID_STATUSES:
-        pipeline.insert(3, {'$match': {'images.status': status_filter}})
+        pipeline.insert(2, {'$match': {'images.status': status_filter}})
     elif status_filter:
         return jsonify({
             "code": 400,
