@@ -250,20 +250,20 @@ create virtual enviroment and activate it. This should be different environment 
 
 Edit createtestdb/.envdemo file with your own information and save it as .env file.
 
-In backend/.env file chenge 
-        MONGODB_DB_NAME=image_service to 
-        MONGODB_TEST_DB_NAME=image_service_test
-        (TODO: rewrite using create app factory pattern)
 
 Run create database script:
-        ```bash
-        # Create a virtual environment
+
+    ```bash
         python imagecreator.py
         ```
-        
-Change venv to backend derictory and run a unittests.
-
     ```
+        
+        
+Change venv to backend derictory.
+Change a MONGODB_DB_NAME to image_service_test
+and run a unittests.
+
+    ```bash
     python -m unittest tests/testfile.py
     ```
 
