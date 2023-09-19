@@ -1,3 +1,6 @@
+#
+
+
 # run test
      1. You need to  populate database with imagecreator.py from create_test_db first
      2. in backend/.env file chenge 
