@@ -225,14 +225,32 @@ It transforms HTTP exceptions into JSON responses containing error information, 
 Feel free to explore and use this Flask application for managing groups, images, and viewing statistics. If you have any questions or encounter issues, please refer to the documentation or contact the application developer for assistance.
 
 
-## run test
-     1. You need to  populate database with imagecreator.py from create_test_db first
-     2. in backend/.env file chenge 
-               MONGODB_DB_NAME=image_service to 
-               MONGODB_TEST_DB_NAME=image_service_test
-               (TODO: rewrite using create app factory pattern)
-     3. run 
-               python -m unittest tests/testfile.py
+## Run test
+    1. Go to the create_test_db.
+    2. create virtual enviroment and activate it. It shodul be different environment as it use AWS.
+
+            ```bash
+            # Create a virtual environment
+            python -m venv venv
+
+            # Activate the virtual environment (macOS/Linux)
+            source venv/bin/activate
+
+            # Install required packages
+            pip install -r requirements.txt
+            ```
+
+    
+    3. in backend/.env file chenge 
+        MONGODB_DB_NAME=image_service to 
+        MONGODB_TEST_DB_NAME=image_service_test
+        (TODO: rewrite using create app factory pattern)
+    4. Create a database:
+        ```bash
+        # Create a virtual environment
+        python imagecreator.py
+    3. Run 
+        python -m unittest tests/testfile.py
 
 
 
