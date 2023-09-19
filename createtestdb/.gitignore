@@ -1,3 +1,6 @@
 **/*.pyc 
 *venv
 *.env
+output
+output_for_test
+
