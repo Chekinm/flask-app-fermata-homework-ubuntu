@@ -17,7 +17,8 @@ def get_groups_with_images():
     Endpoint for retrieving a list of groups with associated images.
 
     This endpoint performs the following actions:
-    1. Joins the 'groups' collection with the 'images' collection based on the 'group_id' field.
+    1. Joins the 'groups' collection with the 'images' collection based on the
+      'group_id' field.
     2. Sorts and filters the list of images, if necessary.
     3. Groups the images by their associated group and counts them.
     4. Returns a JSON response with the grouped data.
@@ -26,10 +27,13 @@ def get_groups_with_images():
         None
 
     Returns:
-        A JSON response containing a list of groups with associated images and counts.
-        If a 'status' query parameter is provided and is a valid status, the response will
+        A JSON response containing a list of groups with associated
+        images and counts.
+        If a 'status' query parameter is provided and is a valid status,
+        the response will
         only include images with the specified status.
-        If the 'status' parameter is invalid, a 400 Bad Request response is returned.
+        If the 'status' parameter is invalid,
+        a 400 Bad Request response is returned.
 
     HTTP Methods:
         GET
@@ -134,12 +138,15 @@ def update_image_status(image_id):
     """
     Endpoint to change the status of an image by its unique identifier.
 
-    This endpoint allows you to update the status of an image identified by its 'image_id'.
-    The image status is modified based on the data provided in the request JSON.
+    This endpoint allows you to update the status of an image
+    identified by its 'image_id'.
+    The image status is modified based on the
+    data provided in the request JSON.
 
     Args:
-        image_id (str): The unique identifier of the image (in ObjectId format).
-        
+        image_id (str): The unique identifier of the
+        image (in ObjectId format).
+
     HTTP Methods:
         PUT
 
@@ -153,11 +160,16 @@ def update_image_status(image_id):
 
     Returns:
         A JSON response indicating the result of the status update:
-        - If the 'image_id' is in an invalid format, a 400 Bad Request response is returned.
-        - If the 'status' provided is not a valid status, a 400 Bad Request response is returned.
-        - If the status is successfully updated, a 200 OK response with a success message is returned.
-        - If the specified image ID is not found in the database, a 400 Bad Request response is returned.
-        - If an exception occurs during the database update, a 500 Internal Server Error response
+        - If the 'image_id' is in an invalid format, a 400 Bad Request
+        response is returned.
+        - If the 'status' provided is not a valid status, a 400 Bad
+        Request response is returned.
+        - If the status is successfully updated, a 200 OK response with a
+        success message is returned.
+        - If the specified image ID is not found in the database, a 400 Bad
+        Request response is returned.
+        - If an exception occurs during the database update, a 500 Internal
+        Server Error response
         with an error description is returned.
 
     Example Usage:
@@ -184,7 +196,8 @@ def update_image_status(image_id):
         {
             "code": 400,
             "name": "Invalid status",
-            "description": "Valid statuses are - ['approved', 'rejected', 'pending']"
+            "description": "Valid statuses are -
+                    ['approved', 'rejected', 'pending']"
         }
 
     Response (Image Not Found):
@@ -251,8 +264,10 @@ def get_statistics():
     """
     Endpoint to retrieve statistics for images created in the last 30 days.
 
-    This endpoint calculates statistics based on images' creation dates within the last 30 days.
-    It counts images grouped by their 'status' field and returns the counts as a JSON response.
+    This endpoint calculates statistics based on images'
+    creation dates within the last 30 days.
+    It counts images grouped by their 'status' field and returns
+    the counts as a JSON response.
 
     Args:
         None
@@ -264,8 +279,9 @@ def get_statistics():
         /statistics
 
     Returns:
-        A JSON response containing statistics for images created in the last 30 days.
-        The statistics are grouped by 'status' and include the count of images for each status.
+        A JSON response containing statistics
+        for images created in the last 30 days. The statistics are grouped
+        by 'status'and include the count of images for each status.
 
     Example Usage:
         GET /statistics
@@ -276,9 +292,10 @@ def get_statistics():
             "rejected": 5,
             "pending": 8
         }
-        
+
     Notes:
-        - The endpoint uses a default period of the last 30 days to calculate statistics.
+        - The endpoint uses a default period of the last 30 days
+        to calculate statistics.
         - Images outside this time frame are excluded from the statistics.
     """
     # days = request.args.get('days')
@@ -314,14 +331,15 @@ def get_statistics():
     return jsonify(statistics), 200
 
 
-
 @app.errorhandler(HTTPException)
 def handle_exception(e):
     """
     Error handler for converting HTTP exceptions into JSON responses.
 
-    This error handler is used to intercept HTTP exceptions that occur during request processing.
-    It transforms these exceptions into JSON responses containing error information.
+    This error handler is used to intercept HTTP exceptions
+    that occur during request processing.
+    It transforms these exceptions into JSON
+    responses containing error information.
 
     Args:
         e (HTTPException): The HTTP exception raised during request processing.
@@ -335,12 +353,15 @@ def handle_exception(e):
         }
 
     Example Usage:
-        This error handler is automatically invoked when an HTTP exception occurs within the application.
+        This error handler is automatically invoked when an HTTP
+        exception occurs within the application.
         It ensures that error responses are in JSON format rather than HTML.
 
     Notes:
-        - The function retrieves the HTTP status code, status name, and description from the exception.
-        - It sets the response's content type to "application/json" and returns the JSON response.
+        - The function retrieves the HTTP status code, status name,
+        and description from the exception.
+        - It sets the response's content type to "application/json"
+        and returns the JSON response.
 
     """
     response = e.get_response()
