@@ -19,8 +19,7 @@ This Flask application serves as a RESTful API for managing groups and images. I
 
 The application utilizes a MongoDB database to store and retrieve data, including groups and images. It also includes error handling for common HTTP exceptions.
 IT supposed that you have MongoFB up and running somewhere.
-It also uses AWS S3 for demonstaration purposes. So you also need and basket there.
-Check config files on what you need about to know to connect to them.
+It also uses AWS S3 for demonstaration purposes. So you also need a basket there.
 
 ---
 
@@ -41,6 +40,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+Before run the application you need to tne .env file.
+Open .envdemo file. Fill it with your specific information and save as .env file.
 To run the application, execute the following command:
 
 ```bash
@@ -231,33 +232,40 @@ Feel free to explore and use this Flask application for managing groups, images,
 
 
 ## Run test
-    1. Go to the create_test_db.
-    2. create virtual enviroment and activate it. It shodul be different environment as it use AWS.
 
-            ```bash
-            # Create a virtual environment
-            python -m venv venv
+Go to the create_test_db.
+create virtual enviroment and activate it. This should be different environment as it use AWS.
 
-            # Activate the virtual environment (macOS/Linux)
-            source venv/bin/activate
 
-            # Install required packages
-            pip install -r requirements.txt
-            ```
+    ```bash
+    # Create a virtual environment
+    python -m venv venv
 
-    
-    3. in backend/.env file chenge 
+    # Activate the virtual environment (macOS/Linux)
+    source venv/bin/activate
+
+    # Install required packages
+    pip install -r requirements.txt
+    ```
+
+Edit createtestdb/.envdemo file with your own information and save it as .env file.
+
+In backend/.env file chenge 
         MONGODB_DB_NAME=image_service to 
         MONGODB_TEST_DB_NAME=image_service_test
         (TODO: rewrite using create app factory pattern)
-    4. Create a database:
+
+Run create database script:
         ```bash
         # Create a virtual environment
         python imagecreator.py
-    3. Run 
-        python -m unittest tests/testfile.py
+        ```
+        
+Change venv to backend derictory and run a unittests.
 
-
+    ```
+    python -m unittest tests/testfile.py
+    ```
 
 
 ## Task description
