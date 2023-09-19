@@ -1,4 +1,230 @@
-#
+# Flask App README
+
+This README provides an overview of a Flask application and its primary routes and functionalities. The application is designed to manage and retrieve data related to groups and images.
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Routes and Functionalities](#routes-and-functionalities)
+  - [Get Groups with Images](#get-groups-with-images)
+  - [Update Image Status](#update-image-status)
+  - [Get Statistics](#get-statistics)
+- [Error Handling](#error-handling)
+
+---
+
+## Introduction
+
+This Flask application serves as a RESTful API for managing groups and images. It provides endpoints for retrieving groups with associated images, updating the status of an image, and retrieving statistics for images created in the last 30 days.
+
+The application utilizes a MongoDB database to store and retrieve data, including groups and images. It also includes error handling for common HTTP exceptions.
+
+---
+
+## Installation
+
+Before running the application, ensure you have Python and MongoDB installed on your system. You can set up a virtual environment and install the required packages using the following commands:
+
+```bash
+# Create a virtual environment (optional but recommended)
+python -m venv venv
+
+# Activate the virtual environment (Windows)
+venv\Scripts\activate
+
+# Activate the virtual environment (macOS/Linux)
+source venv/bin/activate
+
+# Install required packages
+pip install -r requirements.txt
+```
+
+To run the application, execute the following command:
+
+```bash
+python run.py
+```
+
+The application should now be running and accessible at `http://localhost:5000`.
+
+---
+
+## Routes and Functionalities
+
+### Get Groups with Images
+
+- **Endpoint:** `/groups`
+- **HTTP Method:** GET
+
+This endpoint retrieves a list of groups with associated images. It performs the following actions:
+
+1. Joins the 'groups' collection with the 'images' collection based on the 'group_id' field.
+2. Sorts and filters the list of images, if necessary.
+3. Groups the images by their associated group and counts them.
+4. Returns a JSON response with the grouped data.
+
+#### Request Parameters
+
+- `status` (optional): Filters the images by status. If provided and valid, the response will only include images with the specified status.
+
+#### Example Usage
+
+```http
+GET /groups?status=approved
+```
+
+#### Response
+
+```json
+[
+    {
+        "_id": "ObjectId",
+        "name": "Group 1",
+        "images": [
+            {
+                "_id": "ObjectId",
+                "name": "Image 1",
+                "status": "approved",
+                "created_at": "2023-09-18T12:00:00Z"
+            },
+            {
+                "_id": "ObjectId",
+                "name": "Image 2",
+                "status": "approved",
+                "created_at": "2023-09-18T13:00:00Z"
+            }
+        ],
+        "count": 2
+    },
+    {
+        "_id": "ObjectId",
+        "name": "Group 2",
+        "images": [
+            {
+                "_id": "ObjectId",
+                "name": "Image 3",
+                "status": "approved",
+                "created_at": "2023-09-18T14:00:00Z"
+            }
+        ],
+        "count": 1
+    }
+]
+```
+
+### Update Image Status
+
+- **Endpoint:** `/images/<image_id>`
+- **HTTP Method:** PUT
+
+This endpoint allows you to update the status of an image identified by its unique identifier (`image_id`). The image status is modified based on the data provided in the request JSON.
+
+#### Request Parameters
+
+- `image_id`: The unique identifier of the image (in ObjectId format).
+
+#### Request JSON
+
+```json
+{
+    "status": "new_status"
+}
+```
+
+- `status`: The new status to assign to the image. It must be one of the valid statuses.
+
+#### Example Usage
+
+```http
+PUT /images/5f76b5c5a548ebe57f213b3a
+```
+
+#### Response (Success)
+
+```json
+{
+    "message": "Image status updated"
+}
+```
+
+#### Response (Invalid ObjectId)
+
+```json
+{
+    "code": 400,
+    "name": "Invalid ObjectId",
+    "description": "Object ID is in the wrong format"
+}
+```
+
+#### Response (Invalid Status)
+
+```json
+{
+    "code": 400,
+    "name": "Invalid status",
+    "description": "Valid statuses are - ['approved', 'rejected', 'pending']"
+}
+```
+
+#### Response (Image Not Found)
+
+```json
+{
+    "code": 400,
+    "name": "Image not found",
+    "description": "Specified ID was not found in the database"
+}
+```
+
+#### Response (Database Exception)
+
+```json
+{
+    "code": 500,
+    "name": "MongoDB exception occurred",
+    "description": "An error occurred while updating the image status"
+}
+```
+
+### Get Statistics
+
+- **Endpoint:** `/statistics`
+- **HTTP Method:** GET
+
+This endpoint retrieves statistics for images created in the last 30 days. It calculates statistics based on images' creation dates within the specified time frame and groups them by their 'status' field.
+
+#### Example Usage
+
+```http
+GET /statistics
+```
+
+#### Response
+
+```json
+{
+    "approved": 12,
+    "rejected": 5,
+    "pending": 8
+}
+```
+
+**Notes:**
+- The endpoint uses a default period of the last 30 days to calculate statistics.
+- Images outside this time frame are excluded from the statistics.
+
+---
+
+## Error Handling
+
+The application includes an error handler that converts HTTP exceptions into JSON responses. This error handler ensures that error responses are in JSON format rather than HTML.
+
+It transforms HTTP exceptions into JSON responses containing error information, including the HTTP status code, status name, and a description of the error.
+
+---
+
+Feel free to explore and use this Flask application for managing groups, images, and viewing statistics. If you have any questions or encounter issues, please refer to the documentation or contact the application developer for assistance.
 
 
 # run test
